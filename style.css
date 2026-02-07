@@ -207,7 +207,7 @@ img{
     right: 0.2em;
     width: 1.2em;
     height: 1.2em;
-    background-image: url('./images/moon.png');
+    background-image: url('moon.png');
     background-size: cover;
 }
 .mars::before {
