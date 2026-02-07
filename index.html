@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Solar System</title>
+  <link rel=stylesheet href="style.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet">
+
+</head>
+
+<body>
+  <video autoplay muted loop class="video-bg">
+    <source src="galaxy_small.mp4" type="video/mp4">
+    <!-- Add your video source here -->
+  </video>
+  <div class="logo-container">
+    <div id="logo"><img src="logo.png"></div>
+  </div>
+  <div class="details">
+    <H1 id="title">Chronicles of the Cosmos-</H1>
+    <P>Tracing the milestones that shaped our understanding of the universe.</P>
+    <P>Welcome!!Explore the adventures of humanity from astrophysics to planetary science our cosmos covers it all. Each
+      planet in the solar system represents a distinct branch of astronomical study. Click a planet to uncover the
+      discoveries, missions, and events that shaped our understanding of the universe.</P>
+  </div>
+  <div class="container">
+    <div class="sun">
+      <img src="sun.png" alt="sun">
+    </div>
+    <div class="mercury"><div class="planet-click"></div></div>
+    <div class="venus"><div class="planet-click"></div></div>
+    <div class="earth"><div class="planet-click"></div>
+      <div class="moon"><div class="planet-click"></div></div>
+    </div>
+    <div class="mars"><div class="planet-click"></div></div>
+    <div class="jupiter"><div class="planet-click"></div></div>
+    <div class="saturn"><div class="planet-click"></div></div>
+    <div class="uranus"><div class="planet-click"></div></div>
+    <div class="neptune"><div class="planet-click"></div></div>
+    <div class="pluto"><div class="planet-click"></div></div>
+  </div>
+  <div id="event-panel" class="event-panel hidden">
+    <button id="close-panel" class="close-btn">×</button>
+    <h2 id="event-title"></h2>
+    <ul id="event-list"></ul>
+  </div>
+
+  <script>
+    function createStars() {
+      const container = document.querySelector("body");
+      for (let i = 0; i < 1000; i++) {
+        const star = document.createElement("div");
+        star.className = "star";
+        star.style.width = ".1px";
+        star.style.height = ".1px";
+        star.style.top = Math.random() * 100 + "%";
+        star.style.left = Math.random() * 100 + "%";
+        container.appendChild(star);
+      }
+    }
+    createStars();
+
+    const events = {
+      earth: {
+        title: "Planent Astrophysics",
+        items: [
+          "1687 - Newton's Law of Universal Gravitation published",
+          "1781 - William Herschel discovers Uranus using telescope",
+          "1838 - Friedrich Bessel measures first stellar parallax (61 Cygni)",
+          "1905 - Einstein publishes Special Theory of Relativity",
+          "1915 - Einstein's General Theory of Relativity completed",
+          "1929 - Edwin Hubble discovers universe expansion",
+          "1964 - Discovery of Cosmic Microwave Background Radiation",
+          "1967 - Discovery of first pulsar by Jocelyn Bell Burnell",
+          "1974 - Discovery of Hawking Radiation theory",
+          "1998 - Discovery of accelerating universe expansion (Dark Energy)",
+          "2015 - First detection of gravitational waves (LIGO)",
+          "2019 - First image of black hole (Event Horizon Telescope)",
+          "2022 - James Webb Space Telescope begins operations"
+        ]
+      },
+      mars: {
+        title: "Planent Cosmology",
+        items: [
+          "1543 - Copernicus proposes heliocentric model",
+          "1610 - Galileo's telescopic observations support heliocentrism",
+          "1755 - Kant proposes nebular hypothesis for solar system formation",
+          "1927 - Georges Lemaître proposes Big Bang theory",
+          "1929 - Hubble's Law establishes expanding universe",
+          "1948 - George Gamow predicts Cosmic Microwave Background",
+          "1964 - Penzias and Wilson detect CMB radiation",
+          "1980 - Alan Guth proposes Cosmic Inflation theory",
+          "1992 - COBE satellite detects CMB anisotropies",
+          "1998 - Discovery of dark energy through supernova observations",
+          "2003 - WMAP provides precise measurements of universe age (13.8 billion years)",
+          "2013 - Planck satellite releases detailed CMB map",
+          "2016 - LIGO detects gravitational waves confirming general relativity"
+        ]
+      },
+      jupiter: {
+        title: "Planent Aerospace",
+        items: [
+          "1957 - Sputnik 1: First artificial satellite launched (USSR)",
+          "1961 - Yuri Gagarin: First human in space",
+          "1969 - Apollo 11: First humans land on the Moon",
+          "1971 - First space station (Salyut 1) launched",
+          "1981 - First Space Shuttle launch (Columbia)",
+          "1986 - Mir Space Station deployment begins",
+          "1990 - Hubble Space Telescope launched",
+          "1998 - International Space Station construction begins",
+          "2004 - SpaceShipOne: First private manned spaceflight",
+          "2012 - SpaceX Dragon: First commercial spacecraft to ISS",
+          "2015 - First rocket booster landing (SpaceX Falcon 9)",
+          "2020 - SpaceX Crew Dragon: First commercial crew mission",
+          "2021 - James Webb Space Telescope launched",
+          "2022 - Artemis I mission tests Moon return capabilities"
+        ]
+      },
+      mercury: {
+        title: "Planet SpaceRocks",
+        items: [
+          "1610 - Galileo discovers four largest moons of Jupiter",
+          "1655 - Christiaan Huygens discovers Titan (Saturn's moon)",
+          "1781 - William Herschel discovers Uranus",
+          "1846 - Neptune discovered by mathematical prediction",
+          "1930 - Clyde Tombaugh discovers Pluto",
+          "1957 - First artificial satellite (Sputnik) orbits Earth",
+          "1962 - Mariner 2: First successful planetary flyby (Venus)",
+          "1965 - Mariner 4: First Mars flyby reveals cratered surface",
+          "1974 - Mariner 10: First Mercury flyby",
+          "1976 - Viking landers search for life on Mars",
+          "1979 - Voyager missions reveal details of outer planets",
+          "1995 - First exoplanet discovered (51 Pegasi b)",
+          "2006 - Pluto reclassified as dwarf planet",
+          "2012 - Curiosity rover lands on Mars",
+          "2015 - New Horizons flyby of Pluto",
+          "2021 - Perseverance rover and Ingenuity helicopter on Mars"
+        ]
+      },
+      venus: {
+        title: "Planent StellarAstro",
+        items: [
+          "1608 - Hans Lippershey invents the telescope",
+          "1718 - Edmond Halley discovers proper motion of stars",
+          "1838 - First stellar distance measured (61 Cygni)",
+          "1859 - Kirchhoff and Bunsen discover spectroscopy for stellar analysis",
+          "1912 - Henrietta Leavitt discovers Period-Luminosity relation",
+          "1920 - First stellar diameter measured (Betelgeuse)",
+          "1924 - Eddington proposes stellar nuclear fusion",
+          "1939 - Hans Bethe explains stellar energy production",
+          "1952 - First stellar spectrum showing exoplanet effect",
+          "1967 - Discovery of pulsars (neutron stars)",
+          "1987 - Supernova 1987A observed in detail",
+          "1992 - First planets around pulsar discovered",
+          "2015 - Discovery of most Earth-like exoplanet (Kepler-452b)",
+          "2020 - Betelgeuse dimming event observed",
+          "2022 - James Webb observes stellar formation in unprecedented detail"
+        ]
+      },
+      saturn: {
+        title: "Planet Doorbin",
+        items: [
+          "1931 - Karl Jansky detects first cosmic radio waves",
+          "1937 - Grote Reber builds first radio telescope",
+          "1946 - First radar detection of the Moon",
+          "1951 - Detection of 21-cm hydrogen line",
+          "1960 - Discovery of quasars through radio observation",
+          "1963 - Discovery of first pulsar using radio telescope",
+          "1964 - Cosmic Microwave Background discovered via radio",
+          "1967 - Very Long Baseline Interferometry (VLBI) developed",
+          "1974 - Arecibo Message sent to globular cluster M13",
+          "1977 - WOW! Signal detected at Ohio State",
+          "1980 - Very Large Array (VLA) completed in New Mexico",
+          "1995 - First brown dwarf confirmed via radio observations",
+          "2007 - First Fast Radio Burst (FRB) discovered",
+          "2016 - FAST (China) becomes world's largest radio telescope",
+          "2019 - Event Horizon Telescope images black hole using radio"
+        ]
+      },
+      uranus: {
+        title: " Observational Astronomy",
+        items: [
+          "1609 - Galileo makes first astronomical telescope observations",
+          "1668 - Isaac Newton builds first reflecting telescope",
+          "1781 - William Herschel discovers Uranus",
+          "1845 - Lord Rosse observes spiral structure of galaxies",
+          "1887 - Michelson-Morley experiment using astronomical observations",
+          "1908 - 60-inch Mount Wilson telescope completed",
+          "1917 - 100-inch Hooker Telescope completed",
+          "1948 - 200-inch Hale Telescope completed (Palomar)",
+          "1990 - Hubble Space Telescope launched",
+          "1993 - Keck Observatory begins operations (10m mirrors)",
+          "1998 - Discovery of accelerating universe using supernovae",
+          "2009 - Kepler Space Telescope launches for exoplanet hunting",
+          "2016 - LIGO directly observes gravitational waves",
+          "2022 - James Webb Space Telescope reveals earliest galaxies",
+          "2024 - Vera Rubin Observatory begins operations"
+        ]
+      },
+      neptune: {
+        title: "Planet Astrobiology & Exoplanets",
+        items: [
+          "1960 - Drake Equation formulated for estimating alien civilizations",
+          "1961 - First SETI conference held at Green Bank",
+          "1969 - Murchison meteorite contains amino acids",
+          "1976 - Viking missions search for life on Mars",
+          "1995 - First exoplanet discovered (51 Pegasi b)",
+          "1996 - Controversial Mars meteorite ALH84001 study",
+          "2009 - Kepler mission begins discovering thousands of exoplanets",
+          "2013 - Kepler discovers planets in habitable zones",
+          "2015 - Evidence of liquid water on Mars confirmed",
+          "2017 - TRAPPIST-1 system with 7 Earth-sized planets discovered",
+          "2018 - Organic molecules found on Mars by Curiosity",
+          "2020 - Phosphine detected in Venus atmosphere (debated)",
+          "2021 - James Webb designed to study exoplanet atmospheres",
+          "2023 - JWST detects potential biosignatures on exoplanet K2-18b"
+        ]
+      },
+      pluto: {
+        title: "Planet Deep Space Exploration",
+        items: [
+          "1972 - Pioneer 10 launched to Jupiter and beyond",
+          "1977 - Voyager 1 and 2 launched for Grand Tour",
+          "1979 - Voyager missions reach Jupiter",
+          "1980-81 - Voyager missions encounter Saturn",
+          "1986 - Voyager 2 reaches Uranus (only visit to date)",
+          "1989 - Voyager 2 reaches Neptune (only visit to date)",
+          "1990 - Voyager 1 takes 'Pale Blue Dot' photo of Earth",
+          "1997 - Cassini-Huygens launched to Saturn",
+          "2004 - Cassini enters Saturn orbit",
+          "2006 - New Horizons launched to Pluto",
+          "2012 - Voyager 1 enters interstellar space",
+          "2015 - New Horizons Pluto flyby reveals detailed surface",
+          "2017 - Cassini's Grand Finale dive into Saturn",
+          "2019 - New Horizons flyby of Arrokoth (Kuiper Belt)",
+          "2025 - Both Voyagers still transmitting from interstellar space"
+        ]
+      }
+    };
+
+    // Attach click listeners
+    Object.keys(events).forEach(planet => {
+      const el = document.querySelector(`.${planet}`);
+      if (!el) return;
+
+      el.addEventListener("click", () => {
+        const panel = document.getElementById("event-panel");
+        const title = document.getElementById("event-title");
+        const list = document.getElementById("event-list");
+
+        title.textContent = events[planet].title;
+        list.innerHTML = "";
+
+        events[planet].items.forEach(event => {
+          const li = document.createElement("li");
+          li.textContent = event;
+          list.appendChild(li);
+        });
+
+        panel.classList.remove("hidden");
+        panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+    });
+
+    // Close button functionality
+    document.getElementById("close-panel").addEventListener("click", () => {
+      document.getElementById("event-panel").classList.add("hidden");
+    });
+
+  </script>
+</body>
+
+</html>
